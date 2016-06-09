@@ -18,6 +18,7 @@ namespace LogAnalyzer.NHibernate.Mapping
       Map(x => x.OperationName);
       Map(x => x.EntityType);
       Map(x => x.Tenant);
+      Map(x => x.OperationObjectType);
     }
   }
 }

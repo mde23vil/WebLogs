@@ -347,6 +347,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Operations\Index.cshtml" />
     <Content Include="Views\Operations\CreateOperationStatisticsChart.cshtml" />
+    <Content Include="Views\Operations\EditOperationStatisticsChart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

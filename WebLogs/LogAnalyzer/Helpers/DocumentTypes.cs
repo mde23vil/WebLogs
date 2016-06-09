@@ -7,7 +7,7 @@ namespace LogAnalyzer.Helpers
 {
   public static class EntityTypes
   {
-    public static IEnumerable<string> GetDocumentTypes()
+    public static IEnumerable<string> GetDocumentInterfaces()
     {
       return new List<string>()
       {
@@ -27,6 +27,29 @@ namespace LogAnalyzer.Helpers
         "IOutgoingLetter",
         //Projects
         "IProjectDocument"
+      };
+    }
+
+    public static IEnumerable<string> GetDocumentTypes()
+    {
+      return new List<string>()
+      {
+        //Contracts
+        "Contract",
+        "ContractStatement",
+        "IncomingInvoice",
+        "SupAgreement",
+        //Docflow
+        "Addendum",
+        "Memo",
+        "Minutes",
+        "SimpleDocument",
+        //RecordManagement
+        "IncomingLetter",
+        "Order",
+        "OutgoingLetter",
+        //Projects
+        "ProjectDocument"
       };
     }
   }

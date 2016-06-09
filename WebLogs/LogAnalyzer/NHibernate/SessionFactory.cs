@@ -13,7 +13,7 @@ namespace LogAnalyzer.NHibernate
   public static class SessionFactory
   {
     private static string _connectionString;
-    private static ISession _session;
+    private static ISessionFactory _sessionFactory;
 
     private static ISessionFactory CreateSessionFactory(string connectionString = @"Data Source = Ruslan-PC2\SQLEXPRESS; Initial Catalog = LogAnalyzer; User ID = admin; Password = 11111")
     {
@@ -28,7 +28,8 @@ namespace LogAnalyzer.NHibernate
 
     public static ISession GetSession()
     {
-      return _session ?? (_session = CreateSessionFactory().OpenSession());
+      _sessionFactory = _sessionFactory ?? CreateSessionFactory();
+      return _sessionFactory.OpenSession();
     }
   }
 
