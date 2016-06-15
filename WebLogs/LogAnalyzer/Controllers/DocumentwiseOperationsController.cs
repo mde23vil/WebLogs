@@ -17,7 +17,7 @@ using NHibernate.Linq;
 
 namespace LogAnalyzer.Controllers
 {
-  public class OperationsController : Controller
+  public class DocumentwiseOperationsController : Controller
   {
     // GET: Operations
     public ActionResult Index()

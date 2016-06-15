@@ -165,7 +165,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\OperationsController.cs" />
+    <Compile Include="Controllers\DocumentwiseOperationsController.cs" />
+    <Compile Include="Controllers\UserwiseOperationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -345,9 +346,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Operations\Index.cshtml" />
-    <Content Include="Views\Operations\CreateOperationStatisticsChart.cshtml" />
-    <Content Include="Views\Operations\EditOperationStatisticsChart.cshtml" />
+    <Content Include="Views\DocumentwiseOperations\Index.cshtml" />
+    <Content Include="Views\DocumentwiseOperations\CreateOperationStatisticsChart.cshtml" />
+    <Content Include="Views\DocumentwiseOperations\EditOperationStatisticsChart.cshtml" />
+    <Content Include="Views\UserwiseOperations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

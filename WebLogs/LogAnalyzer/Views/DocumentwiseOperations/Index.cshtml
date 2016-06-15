@@ -2,11 +2,10 @@
 @model IEnumerable<LogAnalyzer.Models.OperationRecord>
 
 @{
-  ViewBag.Title = "Operations";
+  ViewBag.Title = "Operations by Documents";
 }
 
 <head>
-    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap.min.css")"/>
     <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-datepicker.min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-datetimepicker.css")"/>
 
@@ -18,10 +17,10 @@
     <script src="@Url.Content("~/Scripts/bootstrap-datetimepicker.js")" type="text/javascript"></script>
 </head>
 
-<h2>Operations</h2>
 <div class="row">
+    <div class="h2">Opoerations by Document Types</div>
     <div class="col-md-2">
-        @Html.DropDownList("tenant", ViewData["Tenants"] as SelectList, new Dictionary<string, object>() { { "class", "form-control" } } )
+        @Html.DropDownList("tenant", ViewData["Tenants"] as SelectList, new Dictionary<string, object>() { { "class", "form-control" } })
     </div>
     <div class="container">
         <div class="col-md-4">
@@ -37,16 +36,14 @@
         <div class="col-md-4">
             <div class="form-group">
                 <div class="input-group date" id="datetimepicker2">
-                    <input type="text" class="form-control"/>
+                    <input type="text" class="form-control" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                 </div>
             </div>
         </div>
-        <button class="btn btn-success col-md-2" id="refresh">
-            
-        </button>
+        <button class="btn btn-success col-md-2" id="refresh"></button>
     </div>
     <script type="text/javascript">
         $(function () {
@@ -63,6 +60,7 @@
         });
     </script>
 </div>
+
 <div class="row">
     <div id="CreateOperationStatisticsChart" class="col-md-12">
     </div>
@@ -75,25 +73,25 @@
 
 <script>
     $(document).ready(function () {
-        $.get("/Operations/CreateOperationStatisticsChart", function (r) {
+        $.get("/DocumentwiseOperations/CreateOperationStatisticsChart", function (r) {
             $("#CreateOperationStatisticsChart").html(r);
         });
     });
 
     $(document).ready(function () {
-        $.get("/Operations/EditOperationStatisticsChart", function (r) {
+        $.get("/DocumentwiseOperations/EditOperationStatisticsChart", function (r) {
             $("#EditOperationStatisticsChart").html(r);
         });
     });
 
     $('#refresh').click(function () {
         var tenant = $('#tenant')[0].options[$('#tenant')[0].selectedIndex].value;
-        $.get("/Operations/CreateOperationStatisticsChart?tenant=" + tenant
+        $.get("/DocumentwiseOperations/CreateOperationStatisticsChart?tenant=" + tenant
             + "&fromDate=" + $('#datetimepicker1').data('date')
             + "&toDate=" + $('#datetimepicker2').data('date'), function (r) {
             $("#CreateOperationStatisticsChart").html(r);
             });
-        $.get("/Operations/EditOperationStatisticsChart?tenant=" + tenant
+        $.get("/DocumentwiseOperations/EditOperationStatisticsChart?tenant=" + tenant
             + "&fromDate=" + $('#datetimepicker1').data('date')
             + "&toDate=" + $('#datetimepicker2').data('date'), function (r) {
                 $("#EditOperationStatisticsChart").html(r);

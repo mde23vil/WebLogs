@@ -1,0 +1,11 @@
+﻿
+@{
+  ViewBag.Title = "Operations by Users";
+}
+
+<div class="row">
+    <div class="h2">Opoerations by Document Types</div>
+    <div class="col-md-2">
+        @Html.DropDownList("tenant", ViewData["Tenants"] as SelectList, new Dictionary<string, object>() { { "class", "form-control" } })
+    </div>
+</div>
