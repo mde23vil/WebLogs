@@ -12,6 +12,7 @@ using DotNet.Highcharts.Options;
 using LogAnalyzer.Helpers;
 using LogAnalyzer.Models;
 using LogAnalyzer.NHibernate;
+using LogAnalyzer.ViewModel;
 using NHibernate.Cfg.ConfigurationSchema;
 using NHibernate.Linq;
 
@@ -37,11 +38,11 @@ namespace LogAnalyzer.Controllers
     {
       var session = SessionFactory.GetSession();
       var interfaces = EntityTypes.GetDocumentInterfaces().ToList();
-      var operations = session.Query<OperationRecord>()
+      var operations = Repository.GetOpertaionRecords()
         .Where(x => interfaces.Contains(x.EntityType))
         .Where(x => x.OperationName.ToLower().Contains("create"));
 
-      operations = GlobalFilters(operations, tenant, fromDate, toDate);
+      operations = OperationRecord.GlobalFilters(operations, tenant, fromDate, toDate);
       var points = GetSeriesByEntityType(operations);
 
       var chart = new Highcharts("CreationOperations")
@@ -78,11 +79,11 @@ namespace LogAnalyzer.Controllers
     {
       var session = SessionFactory.GetSession();
       var types = EntityTypes.GetDocumentTypes().ToList();
-      var operations = session.Query<OperationRecord>()
+      var operations = Repository.GetOpertaionRecords()
         .Where(x => types.Contains(x.OperationObjectType))
         .Where(x => x.OperationName.ToLower() == "open document to edit");
 
-      operations = GlobalFilters(operations, tenant, fromDate, toDate);
+      operations = OperationRecord.GlobalFilters(operations, tenant, fromDate, toDate);
       var points = GetSeriesByOperationObjectType(operations);
 
       var chart = new Highcharts("EditOperations")
@@ -113,21 +114,6 @@ namespace LogAnalyzer.Controllers
 
       ViewBag.EditChart = chart;
       return PartialView("EditOperationStatisticsChart", operations);
-    }
-
-    private static IQueryable<OperationRecord> GlobalFilters(IQueryable<OperationRecord> operations, string tenant, DateTime? fromDate, DateTime? toDate)
-    {
-
-      if (tenant != "undefined")
-        operations = operations.Where(x => x.Tenant == tenant);
-
-      if (fromDate.HasValue)
-        operations = operations.Where(x => x.Date > fromDate.Value);
-
-      if (toDate.HasValue)
-        operations = operations.Where(x => x.Date < toDate.Value);
-
-      return operations;
     }
 
     private static Point[] GetSeriesByEntityType(IEnumerable<OperationRecord> operations)
