@@ -23,6 +23,7 @@ namespace LogAnalyzer.Controllers
       var session = SessionFactory.GetSession();
       var operations = session.Query<OperationRecord>();
       ViewBag.Tenants = operations.Select(x => x.Tenant).ToList().Distinct();
+      ViewBag.DetailsPageSubTitle = "Operations by users";
       ViewData["Tenants"] = StringsToSelectList(ViewBag.Tenants);
       return View();
     }

@@ -355,6 +355,7 @@
     <Content Include="Views\UserwiseOperations\CreateOperationsByUser.cshtml" />
     <Content Include="Views\UserwiseOperations\UserEditOperations.cshtml" />
     <Content Include="Views\UserwiseOperations\UserDocumentBodyOperations.cshtml" />
+    <Content Include="Views\Shared\DetailsLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

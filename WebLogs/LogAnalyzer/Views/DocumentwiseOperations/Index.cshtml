@@ -3,63 +3,12 @@
 
 @{
   ViewBag.Title = "Operations by Documents";
+  Layout = "~/Views/Shared/DetailsLayout.cshtml";
 }
 
 <head>
-    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-datepicker.min.css")" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-datetimepicker.css")"/>
-
-
     <script src="@Url.Content("~/Scripts/Highcharts-4.0.1/js/highcharts-all.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/Moment.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/bootstrap.min.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/bootstrap-datepicker.min.js")" type="text/javascript"></script>
-    <script src="@Url.Content("~/Scripts/bootstrap-datetimepicker.js")" type="text/javascript"></script>
 </head>
-
-<div class="row">
-    <div class="h2">Opoerations by Document Types</div>
-    <div class="col-md-2">
-        @Html.DropDownList("tenant", ViewData["Tenants"] as SelectList, new Dictionary<string, object>() { { "class", "form-control" } })
-    </div>
-    <div class="container">
-        <div class="col-md-4">
-            <div class="form-group">
-                <div class="input-group date" id="datetimepicker1">
-                    <input type="text" class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <div class="input-group date" id="datetimepicker2">
-                    <input type="text" class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
-        </div>
-        <button class="btn btn-success col-md-2 glyphicon glyphicon-refresh" id="refresh"></button>
-    </div>
-    <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker1').datetimepicker();
-            $('#datetimepicker2').datetimepicker({
-                useCurrent: false //Important! See issue #1075
-            });
-            $("#datetimepicker1").on("dp.change", function (e) {
-                $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
-            });
-            $("#datetimepicker2").on("dp.change", function (e) {
-                $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
-            });
-        });
-    </script>
-</div>
 
 <div class="row">
     <div id="CreateOperationStatisticsChart" class="col-md-12">

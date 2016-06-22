@@ -28,6 +28,7 @@ namespace LogAnalyzer.Controllers
         .Where(x => EntityTypes.GetDocumentInterfaces().Contains(x.EntityType) ||
         EntityTypes.GetDocumentTypes().Contains(x.OperationObjectType));
       ViewBag.Tenants = operations.Select(x => x.Tenant).ToList().Distinct();
+      ViewBag.DetailsPageSubTitle = "Operations by document types";
       ViewData["Tenants"] = StringsToSelectList(ViewBag.Tenants);
 
       return View(operations);
