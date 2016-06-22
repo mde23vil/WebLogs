@@ -166,11 +166,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\DocumentwiseOperationsController.cs" />
+    <Compile Include="Controllers\ListRatingController.cs" />
     <Compile Include="Controllers\UserwiseOperationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DocumentTypes.cs" />
+    <Compile Include="Helpers\SharedHelpers.cs" />
+    <Compile Include="Helpers\Tenants.cs" />
     <Compile Include="Models\OperationRecord.cs" />
     <Compile Include="NHibernate\Mapping\OperationRecordMap.cs" />
     <Compile Include="NHibernate\SessionFactory.cs" />
@@ -356,6 +359,9 @@
     <Content Include="Views\UserwiseOperations\UserEditOperations.cshtml" />
     <Content Include="Views\UserwiseOperations\UserDocumentBodyOperations.cshtml" />
     <Content Include="Views\Shared\DetailsLayout.cshtml" />
+    <Content Include="Views\ListRating\Index.cshtml" />
+    <Content Include="Views\ListRating\ListRatingChartView.cshtml" />
+    <Content Include="Views\ListRating\ListRatingChartByTimeView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

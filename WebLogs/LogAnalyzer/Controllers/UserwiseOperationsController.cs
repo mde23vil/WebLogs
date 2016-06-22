@@ -20,11 +20,9 @@ namespace LogAnalyzer.Controllers
     // GET: UserwiseOperations
     public ActionResult Index()
     {
-      var session = SessionFactory.GetSession();
-      var operations = session.Query<OperationRecord>();
-      ViewBag.Tenants = operations.Select(x => x.Tenant).ToList().Distinct();
+      ViewBag.Tenants = Tenants.ObtainTenantList();
       ViewBag.DetailsPageSubTitle = "Operations by users";
-      ViewData["Tenants"] = StringsToSelectList(ViewBag.Tenants);
+      ViewData["Tenants"] = SharedHelpers.StringsToSelectList(ViewBag.Tenants);
       return View();
     }
 
@@ -161,12 +159,6 @@ namespace LogAnalyzer.Controllers
         }).ToArray();
 
       return group;
-    }
-
-    private static SelectList StringsToSelectList(IEnumerable<string> strings)
-    {
-      var items = strings.Select(x => new { Id = x, Text = x }).ToList();
-      return new SelectList(items, "Id", "Text", items.First().Id);
     }
   }
 }

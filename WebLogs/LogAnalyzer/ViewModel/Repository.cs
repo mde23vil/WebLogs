@@ -14,9 +14,9 @@ namespace LogAnalyzer.ViewModel
 
     public static List<OperationRecord> GetOpertaionRecords()
     {
-      var operations = _operations ?? SessionFactory.GetSession().Query<OperationRecord>().ToList();
+      _operations = _operations ?? SessionFactory.GetSession().Query<OperationRecord>().ToList();
 
-      return operations;
+      return _operations;
     } 
   }
 }
