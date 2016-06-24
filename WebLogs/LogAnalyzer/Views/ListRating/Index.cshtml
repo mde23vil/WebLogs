@@ -18,6 +18,14 @@
     <div id="ListRatingByTimeChart" class="col-md-12">
     </div>
 </div>
+<div class="row">
+    <div id="FolderRatingChart" class="col-md-12">
+    </div>
+</div>
+<div class="row">
+    <div id="FolderRatingByTimeChart" class="col-md-12">
+    </div>
+</div>
 
 
 <script>
@@ -25,25 +33,45 @@
         $.get("/ListRating/ListRatingChart", function (r) {
             $("#ListRatingChart").html(r);
         });
-    });
 
-    $(document).ready(function () {
         $.get("/ListRating/ListRatingByTimeChart", function (r) {
             $("#ListRatingByTimeChart").html(r);
+        });
+
+        $.get("/ListRating/FolderRatingChart", function (r) {
+            $("#FolderRatingChart").html(r);
+        });
+
+        $.get("/ListRating/FolderRatingByTimeChart", function (r) {
+            $("#FolderRatingByTimeChart").html(r);
         });
     });
 
     $('#refresh').click(function () {
         var tenant = $('#tenant')[0].options[$('#tenant')[0].selectedIndex].value;
+
         $.get("/ListRating/ListRatingChart?tenant=" + tenant
             + "&fromDate=" + $('#datetimepicker1').data('date')
             + "&toDate=" + $('#datetimepicker2').data('date'), function (r) {
                 $("#ListRatingChart").html(r);
             });
+
         $.get("/ListRating/ListRatingByTimeChart?tenant=" + tenant
             + "&fromDate=" + $('#datetimepicker1').data('date')
             + "&toDate=" + $('#datetimepicker2').data('date'), function (r) {
                 $("#ListRatingByTimeChart").html(r);
+            });
+
+        $.get("/ListRating/FolderRatingChart?tenant=" + tenant
+            + "&fromDate=" + $('#datetimepicker1').data('date')
+            + "&toDate=" + $('#datetimepicker2').data('date'), function (r) {
+                $("#FolderRatingChart").html(r);
+            });
+
+        $.get("/ListRating/FolderRatingByTimeChart?tenant=" + tenant
+            + "&fromDate=" + $('#datetimepicker1').data('date')
+            + "&toDate=" + $('#datetimepicker2').data('date'), function (r) {
+                $("#FolderRatingByTimeChart").html(r);
             });
     });
 </script>

@@ -362,6 +362,8 @@
     <Content Include="Views\ListRating\Index.cshtml" />
     <Content Include="Views\ListRating\ListRatingChartView.cshtml" />
     <Content Include="Views\ListRating\ListRatingChartByTimeView.cshtml" />
+    <Content Include="Views\ListRating\FolderRatingChartView.cshtml" />
+    <Content Include="Views\ListRating\FolderRatingChartByTimeView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

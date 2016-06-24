@@ -102,6 +102,82 @@ namespace LogAnalyzer.Controllers
       return PartialView("ListRatingChartByTimeView", operations);
     }
 
+    public ActionResult FolderRatingChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
+    {
+      var operations = Repository.GetOpertaionRecords()
+        .Where(x => x.OperationName.ToLower().Contains("navigate to folder"));
+
+      operations = OperationRecord.GlobalFilters(operations, tenant, fromDate, toDate);
+      var points = SharedHelpers.GetSeriesByOperationObjectType(operations);
+
+      var chart = new Highcharts("FolderOpenings")
+                .InitChart(new Chart { PlotShadow = false, PlotBackgroundColor = null, PlotBorderWidth = null, MarginTop = 50 })
+                .SetExporting(new Exporting() { Enabled = false })
+                .SetTitle(new Title { Text = "", Align = HorizontalAligns.Left })
+                .SetTooltip(new Tooltip { Formatter = "function() { return '<b>'+ this.point.name +'</b>: '+ this.y; }" })
+                .SetLegend(new Legend { ItemStyle = "fontWeight: 'normal'" })
+                .SetPlotOptions(new PlotOptions
+                {
+                  Column = new PlotOptionsColumn()
+                  {
+                    AllowPointSelect = true,
+                    Cursor = Cursors.Pointer,
+                    ShowInLegend = true
+                  }
+                })
+                .SetXAxis(new XAxis
+                {
+                  Categories = points.Select(x => x.Name).ToArray()
+                })
+                .SetSeries(new Series
+                {
+                  Type = ChartTypes.Column,
+                  Name = "Количество раз",
+                  Data = new Data(points)
+                });
+
+      ViewBag.FolderChart = chart;
+      return PartialView("FolderRatingChartView", operations);
+    }
+
+    public ActionResult FolderRatingByTimeChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
+    {
+      var operations = Repository.GetOpertaionRecords()
+        .Where(x => x.OperationName.ToLower().Contains("navigate to folder"));
+
+      operations = OperationRecord.GlobalFilters(operations, tenant, fromDate, toDate);
+      var points = GetSeriesByOperationObjectTypeAverageDuration(operations);
+
+      var chart = new Highcharts("FolderTimings")
+                .InitChart(new Chart { PlotShadow = false, PlotBackgroundColor = null, PlotBorderWidth = null, MarginTop = 50 })
+                .SetExporting(new Exporting() { Enabled = false })
+                .SetTitle(new Title { Text = "", Align = HorizontalAligns.Left })
+                .SetTooltip(new Tooltip { Formatter = "function() { return '<b>'+ this.point.name +'</b>: '+ this.y; }" })
+                .SetLegend(new Legend { ItemStyle = "fontWeight: 'normal'" })
+                .SetPlotOptions(new PlotOptions
+                {
+                  Column = new PlotOptionsColumn()
+                  {
+                    AllowPointSelect = true,
+                    Cursor = Cursors.Pointer,
+                    ShowInLegend = true
+                  }
+                })
+                .SetXAxis(new XAxis
+                {
+                  Categories = points.Select(x => x.Name).ToArray()
+                })
+                .SetSeries(new Series
+                {
+                  Type = ChartTypes.Column,
+                  Name = "Среднее время открытия",
+                  Data = new Data(points)
+                });
+
+      ViewBag.FolderByTimeChart = chart;
+      return PartialView("FolderRatingChartByTimeView", operations);
+    }
+
     public static Point[] GetSeriesByOperationObjectTypeAverageDuration(IEnumerable<OperationRecord> operations)
     {
       var group = operations.ToList().GroupBy(x => x.OperationObjectType)
