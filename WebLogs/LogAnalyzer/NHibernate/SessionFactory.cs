@@ -15,7 +15,7 @@ namespace LogAnalyzer.NHibernate
     private static string _connectionString;
     private static ISessionFactory _sessionFactory;
 
-    private static ISessionFactory CreateSessionFactory(string connectionString = @"Data Source = Ruslan-PC2\SQLEXPRESS; Initial Catalog = LogAnalyzer; User ID = admin; Password = 11111")
+    private static ISessionFactory CreateSessionFactory(string connectionString = @"Data Source = DESKTOP-M9RDV9L\SQLEXPRESS; Initial Catalog = LogAnalyzer; User ID = admin; Password = 11111")
     {
       _connectionString = connectionString;
       return Fluently
