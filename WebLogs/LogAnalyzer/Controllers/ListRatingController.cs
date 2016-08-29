@@ -7,6 +7,7 @@ using DotNet.Highcharts;
 using DotNet.Highcharts.Enums;
 using DotNet.Highcharts.Helpers;
 using DotNet.Highcharts.Options;
+using LogAnalyzer.Filters;
 using LogAnalyzer.Helpers;
 using LogAnalyzer.Models;
 using LogAnalyzer.NHibernate;
@@ -14,18 +15,19 @@ using LogAnalyzer.ViewModel;
 
 namespace LogAnalyzer.Controllers
 {
+  [Culture]
   public class ListRatingController : Controller
   {
     // GET: ListRating
     public ActionResult Index()
     {
-      ViewBag.DetailsPageSubTitle = "List use rating";
+      ViewBag.DetailsPageSubTitle = Resources.Resources.ListsRaitingHeader;
       ViewBag.Tenants = Tenants.ObtainTenantList();
       ViewData["Tenants"] = SharedHelpers.StringsToSelectList(ViewBag.Tenants);
 
       return View(Repository.GetOpertaionRecords());
     }
-
+    
     public ActionResult ListRatingChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
     {
       var operations = Repository.GetOpertaionRecords()
@@ -56,7 +58,7 @@ namespace LogAnalyzer.Controllers
                 .SetSeries(new Series
                 {
                   Type = ChartTypes.Column,
-                  Name = "Количество раз",
+                  Name = Resources.Resources.UsesLists,
                   Data = new Data(points)
                 });
 
@@ -94,7 +96,7 @@ namespace LogAnalyzer.Controllers
                 .SetSeries(new Series
                 {
                   Type = ChartTypes.Column,
-                  Name = "Среднее время открытия",
+                  Name = Resources.Resources.AverageLoadTimeLists,
                   Data = new Data(points)
                 });
 
@@ -132,7 +134,7 @@ namespace LogAnalyzer.Controllers
                 .SetSeries(new Series
                 {
                   Type = ChartTypes.Column,
-                  Name = "Количество раз",
+                  Name = Resources.Resources.UsesLists,
                   Data = new Data(points)
                 });
 
@@ -170,7 +172,7 @@ namespace LogAnalyzer.Controllers
                 .SetSeries(new Series
                 {
                   Type = ChartTypes.Column,
-                  Name = "Среднее время открытия",
+                  Name = Resources.Resources.AverageLoadTimeLists,
                   Data = new Data(points)
                 });
 

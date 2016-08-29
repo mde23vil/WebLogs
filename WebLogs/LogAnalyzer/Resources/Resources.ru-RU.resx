@@ -120,4 +120,46 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>Анализатор логов</value>
   </data>
+  <data name="AverageLoadTimeLists" xml:space="preserve">
+    <value>Среднее время открытия</value>
+  </data>
+  <data name="ByDocumentTypesHeader" xml:space="preserve">
+    <value>По типам и видам документов</value>
+  </data>
+  <data name="ByDocumentTypesTooltip" xml:space="preserve">
+    <value>Операции пользователей сгруппированные по типам и видам документов.</value>
+  </data>
+  <data name="ByUsersHeader" xml:space="preserve">
+    <value>По пользователям</value>
+  </data>
+  <data name="ByUsersTooltip" xml:space="preserve">
+    <value>Операции сгруппированные по пользователям. Здесь можно найти самых активных пользователей.</value>
+  </data>
+  <data name="CreatedDocuments" xml:space="preserve">
+    <value>Количество созданных</value>
+  </data>
+  <data name="CreatedEntities" xml:space="preserve">
+    <value>Количество операций создания</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Подробнее »</value>
+  </data>
+  <data name="EditedDocuments" xml:space="preserve">
+    <value>Количество отредактированных</value>
+  </data>
+  <data name="EditedEntities" xml:space="preserve">
+    <value>Количество операций редактирования</value>
+  </data>
+  <data name="ListsRaitingHeader" xml:space="preserve">
+    <value>Рейтинг использования списков</value>
+  </data>
+  <data name="ListsRaitingTooltip" xml:space="preserve">
+    <value>Использование списков и папок пользователями.</value>
+  </data>
+  <data name="UsesLists" xml:space="preserve">
+    <value>Количество открытий</value>
+  </data>
+  <data name="VersionEditEntities" xml:space="preserve">
+    <value> Количество открытий тел документов</value>
+  </data>
 </root>

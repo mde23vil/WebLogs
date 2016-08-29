@@ -120,4 +120,46 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>Log Analyzer</value>
   </data>
+  <data name="AverageLoadTimeLists" xml:space="preserve">
+    <value>Average load time</value>
+  </data>
+  <data name="ByDocumentTypesHeader" xml:space="preserve">
+    <value>Operations by document types</value>
+  </data>
+  <data name="ByDocumentTypesTooltip" xml:space="preserve">
+    <value>Client operations that grouped by document types and kinds.</value>
+  </data>
+  <data name="ByUsersHeader" xml:space="preserve">
+    <value>Operations by users</value>
+  </data>
+  <data name="ByUsersTooltip" xml:space="preserve">
+    <value>Client operations that grouped by users. Here you'll be able to find the most active users.</value>
+  </data>
+  <data name="CreatedDocuments" xml:space="preserve">
+    <value>Created amount</value>
+  </data>
+  <data name="CreatedEntities" xml:space="preserve">
+    <value>Create operations amount</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details »</value>
+  </data>
+  <data name="EditedDocuments" xml:space="preserve">
+    <value>Edited amount</value>
+  </data>
+  <data name="EditedEntities" xml:space="preserve">
+    <value>Edit operations amount</value>
+  </data>
+  <data name="ListsRaitingHeader" xml:space="preserve">
+    <value>Lists use rating</value>
+  </data>
+  <data name="ListsRaitingTooltip" xml:space="preserve">
+    <value>List and folder usage ratings and timings.</value>
+  </data>
+  <data name="UsesLists" xml:space="preserve">
+    <value>Opened</value>
+  </data>
+  <data name="VersionEditEntities" xml:space="preserve">
+    <value>Version edit operations</value>
+  </data>
 </root>

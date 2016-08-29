@@ -1,27 +1,28 @@
-﻿@{
+﻿@using LogAnalyzer.Resources
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Operations by document types</h2>
+        <h2>@Resources.ByDocumentTypesHeader</h2>
         <p>
-            Client operations that grouped by document types and kinds.
+            @Resources.ByDocumentTypesTooltip
         </p>
-        <p><a class="btn btn-default" href="@Url.Action("Index","DocumentwiseOperations")">Details &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","DocumentwiseOperations")">@Resources.Details</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Operations by users</h2>
+        <h2>@Resources.ByUsersHeader</h2>
         <p>
-            Client operations that grouped by users. Here you'll be able to find the most active users.
+            @Resources.ByUsersTooltip
         </p>
-        <p><a class="btn btn-default" href="@Url.Action("Index","UserwiseOperations")">Details &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","UserwiseOperations")">@Resources.Details</a></p>
     </div>
     <div class="col-md-4">
-        <h2>Lists rating</h2>
+        <h2>@Resources.ListsRaitingHeader</h2>
         <p>
-            List and folder usage ratings and timings.
+            @Resources.ListsRaitingTooltip
         </p>
-        <p><a class="btn btn-default" href="@Url.Action("Index","ListRating")">Details &raquo;</a></p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","ListRating")">@Resources.Details</a></p>
     </div>
 </div>

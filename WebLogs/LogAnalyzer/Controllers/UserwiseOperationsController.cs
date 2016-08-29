@@ -7,6 +7,7 @@ using DotNet.Highcharts;
 using DotNet.Highcharts.Enums;
 using DotNet.Highcharts.Helpers;
 using DotNet.Highcharts.Options;
+using LogAnalyzer.Filters;
 using LogAnalyzer.Helpers;
 using LogAnalyzer.Models;
 using LogAnalyzer.NHibernate;
@@ -15,6 +16,7 @@ using NHibernate.Linq;
 
 namespace LogAnalyzer.Controllers
 {
+  [Culture]
   public class UserwiseOperationsController : Controller
   {
     // GET: UserwiseOperations
@@ -57,7 +59,7 @@ namespace LogAnalyzer.Controllers
                 .SetSeries(new Series
                 {
                   Type = ChartTypes.Column,
-                  Name = "Количество операций создания",
+                  Name = Resources.Resources.CreatedEntities,
                   Data = new Data(points)
                 });
 
@@ -96,7 +98,7 @@ namespace LogAnalyzer.Controllers
                 .SetSeries(new Series
                 {
                   Type = ChartTypes.Column,
-                  Name = "Количество операций редактирования",
+                  Name = Resources.Resources.EditedEntities,
                   Data = new Data(points)
                 });
 
@@ -135,7 +137,7 @@ namespace LogAnalyzer.Controllers
                 .SetSeries(new Series
                 {
                   Type = ChartTypes.Column,
-                  Name = "Количество открытий тел документов",
+                  Name = Resources.Resources.VersionEditEntities,
                   Data = new Data(points)
                 });
 

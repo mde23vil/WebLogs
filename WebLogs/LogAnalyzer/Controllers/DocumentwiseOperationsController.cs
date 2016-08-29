@@ -9,6 +9,7 @@ using DotNet.Highcharts;
 using DotNet.Highcharts.Enums;
 using DotNet.Highcharts.Helpers;
 using DotNet.Highcharts.Options;
+using LogAnalyzer.Filters;
 using LogAnalyzer.Helpers;
 using LogAnalyzer.Models;
 using LogAnalyzer.NHibernate;
@@ -18,18 +19,19 @@ using NHibernate.Linq;
 
 namespace LogAnalyzer.Controllers
 {
+  [Culture]
   public class DocumentwiseOperationsController : Controller
   {
     // GET: Operations
     public ActionResult Index()
     {
-      ViewBag.DetailsPageSubTitle = "Operations by document types";
+      ViewBag.DetailsPageSubTitle = Resources.Resources.ByDocumentTypesHeader;
       ViewBag.Tenants = Tenants.ObtainTenantList();
       ViewData["Tenants"] = SharedHelpers.StringsToSelectList(ViewBag.Tenants);
 
       return View(Repository.GetOpertaionRecords());
     }
-
+    
     public ActionResult CreateOperationStatisticsChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
     {
       var interfaces = EntityTypes.GetDocumentInterfaces().ToList();
@@ -62,14 +64,14 @@ namespace LogAnalyzer.Controllers
                 .SetSeries(new Series
                 {
                   Type = ChartTypes.Column,
-                  Name = "Количество созданных",
+                  Name = Resources.Resources.CreatedDocuments,
                   Data = new Data(points)
                 });
 
       ViewBag.Chart = chart;
       return PartialView("CreateOperationStatisticsChart", operations);
     }
-
+    
     public ActionResult EditOperationStatisticsChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
     {
       var types = EntityTypes.GetDocumentTypes().ToList();
@@ -102,7 +104,7 @@ namespace LogAnalyzer.Controllers
                 .SetSeries(new Series
                 {
                   Type = ChartTypes.Column,
-                  Name = "Количество отредактированных",
+                  Name = Resources.Resources.EditedDocuments,
                   Data = new Data(points)
                 });
 

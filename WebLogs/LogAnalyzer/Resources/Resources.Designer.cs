@@ -68,5 +68,131 @@ namespace LogAnalyzer.Resources {
                 return ResourceManager.GetString("ApplicationName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average load time.
+        /// </summary>
+        public static string AverageLoadTimeLists {
+            get {
+                return ResourceManager.GetString("AverageLoadTimeLists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operations by document types.
+        /// </summary>
+        public static string ByDocumentTypesHeader {
+            get {
+                return ResourceManager.GetString("ByDocumentTypesHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client operations that grouped by document types and kinds..
+        /// </summary>
+        public static string ByDocumentTypesTooltip {
+            get {
+                return ResourceManager.GetString("ByDocumentTypesTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operations by users.
+        /// </summary>
+        public static string ByUsersHeader {
+            get {
+                return ResourceManager.GetString("ByUsersHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client operations that grouped by users. Here you&apos;ll be able to find the most active users..
+        /// </summary>
+        public static string ByUsersTooltip {
+            get {
+                return ResourceManager.GetString("ByUsersTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created amount.
+        /// </summary>
+        public static string CreatedDocuments {
+            get {
+                return ResourceManager.GetString("CreatedDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create operations amount.
+        /// </summary>
+        public static string CreatedEntities {
+            get {
+                return ResourceManager.GetString("CreatedEntities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details ».
+        /// </summary>
+        public static string Details {
+            get {
+                return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edited amount.
+        /// </summary>
+        public static string EditedDocuments {
+            get {
+                return ResourceManager.GetString("EditedDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit operations amount.
+        /// </summary>
+        public static string EditedEntities {
+            get {
+                return ResourceManager.GetString("EditedEntities", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lists use rating.
+        /// </summary>
+        public static string ListsRaitingHeader {
+            get {
+                return ResourceManager.GetString("ListsRaitingHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List and folder usage ratings and timings..
+        /// </summary>
+        public static string ListsRaitingTooltip {
+            get {
+                return ResourceManager.GetString("ListsRaitingTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opened.
+        /// </summary>
+        public static string UsesLists {
+            get {
+                return ResourceManager.GetString("UsesLists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version edit operations.
+        /// </summary>
+        public static string VersionEditEntities {
+            get {
+                return ResourceManager.GetString("VersionEditEntities", resourceCulture);
+            }
+        }
     }
 }

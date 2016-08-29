@@ -12,10 +12,8 @@
     <script src="@Url.Content("~/Scripts/bootstrap-datetimepicker.js")" type="text/javascript"></script>
 </head>
 
-
-<h2>DetailsLayout</h2>
 <div class="row">
-    @*<div class="h2">@ViewBag.DetailsPageSubTitle</div>*@
+    <div class="h2">@ViewBag.DetailsPageSubTitle</div>
     <div class="col-md-2">
         @Html.DropDownList("tenant", ViewData["Tenants"] as SelectList, new Dictionary<string, object>() { { "class", "form-control" } })
     </div>
