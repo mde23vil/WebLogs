@@ -178,6 +178,15 @@ namespace LogAnalyzer.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Database consist of log entries collected from {0:d} to {1:d}..
+        /// </summary>
+        public static string LogsCollectedFromTo {
+            get {
+                return ResourceManager.GetString("LogsCollectedFromTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Opened.
         /// </summary>
         public static string UsesLists {

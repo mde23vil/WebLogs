@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LogAnalyzer.Filters;
+using LogAnalyzer.ViewModel;
 
 namespace LogAnalyzer.Controllers
 {
@@ -12,6 +13,9 @@ namespace LogAnalyzer.Controllers
   {
     public ActionResult Index()
     {
+      ViewBag.From = Repository.GetFirstDate();
+      ViewBag.To = Repository.GetLastDate();
+
       return View();
     }
 

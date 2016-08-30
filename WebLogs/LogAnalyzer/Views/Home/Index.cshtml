@@ -4,22 +4,25 @@
 }
 
 <div class="row">
+  <h1>@string.Format(Resources.LogsCollectedFromTo, ViewBag.From, ViewBag.To)</h1>
+</div>
+<div class="row">
     <div class="col-md-4">
-        <h2>@Resources.ByDocumentTypesHeader</h2>
+        <h3>@Resources.ByDocumentTypesHeader</h3>
         <p>
             @Resources.ByDocumentTypesTooltip
         </p>
         <p><a class="btn btn-default" href="@Url.Action("Index","DocumentwiseOperations")">@Resources.Details</a></p>
     </div>
     <div class="col-md-4">
-        <h2>@Resources.ByUsersHeader</h2>
+        <h3>@Resources.ByUsersHeader</h3>
         <p>
             @Resources.ByUsersTooltip
         </p>
         <p><a class="btn btn-default" href="@Url.Action("Index","UserwiseOperations")">@Resources.Details</a></p>
     </div>
     <div class="col-md-4">
-        <h2>@Resources.ListsRaitingHeader</h2>
+        <h3>@Resources.ListsRaitingHeader</h3>
         <p>
             @Resources.ListsRaitingTooltip
         </p>

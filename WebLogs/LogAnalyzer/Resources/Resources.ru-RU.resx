@@ -156,10 +156,13 @@
   <data name="ListsRaitingTooltip" xml:space="preserve">
     <value>Использование списков и папок пользователями.</value>
   </data>
+  <data name="LogsCollectedFromTo" xml:space="preserve">
+    <value>База данных содержит записи логов с {0:d} по {1:d}.</value>
+  </data>
   <data name="UsesLists" xml:space="preserve">
     <value>Количество открытий</value>
   </data>
   <data name="VersionEditEntities" xml:space="preserve">
-    <value> Количество открытий тел документов</value>
+    <value>Количество открытий тел документов</value>
   </data>
 </root>
