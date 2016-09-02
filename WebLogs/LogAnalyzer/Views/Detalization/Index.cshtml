@@ -1,0 +1,63 @@
+﻿@model IEnumerable<LogAnalyzer.Models.OperationRecord>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OperationName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EntityType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OperationObjectType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tenant)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.OperationName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Duration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EntityType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OperationObjectType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tenant)
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>*@
+    </tr>
+}
+
+</table>

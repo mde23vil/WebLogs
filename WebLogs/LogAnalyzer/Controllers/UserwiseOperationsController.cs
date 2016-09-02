@@ -30,10 +30,8 @@ namespace LogAnalyzer.Controllers
 
     public ActionResult UserCreateOperations(string tenant, DateTime? fromDate = null, DateTime? toDate = null)
     {
-      var operations = Repository.GetOpertaionRecords()
+      var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
         .Where(x => x.OperationName.ToLower().Contains("create"));
-
-      operations = OperationRecord.GlobalFilters(operations, tenant, fromDate, toDate);
 
       var points = GetSeriesByUser(operations);
 
@@ -69,11 +67,9 @@ namespace LogAnalyzer.Controllers
 
     public ActionResult UserEditOperations(string tenant, DateTime? fromDate = null, DateTime? toDate = null)
     {
-      var operations = Repository.GetOpertaionRecords()
+      var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
         .Where(x => x.OperationName.ToLower().Contains("edit"));
-
-      operations = OperationRecord.GlobalFilters(operations, tenant, fromDate, toDate);
-
+      
       var points = GetSeriesByUser(operations);
 
       var chart = new Highcharts("EditOperations")
@@ -108,10 +104,8 @@ namespace LogAnalyzer.Controllers
 
     public ActionResult UserDocumentBodyOperations(string tenant, DateTime? fromDate = null, DateTime? toDate = null)
     {
-      var operations = Repository.GetOpertaionRecords()
+      var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
         .Where(x => x.OperationName.ToLower().Contains("open document to"));
-
-      operations = OperationRecord.GlobalFilters(operations, tenant, fromDate, toDate);
 
       var points = GetSeriesByUser(operations);
 

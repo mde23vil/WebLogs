@@ -30,10 +30,9 @@ namespace LogAnalyzer.Controllers
     
     public ActionResult ListRatingChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
     {
-      var operations = Repository.GetOpertaionRecords()
+      var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
         .Where(x => x.OperationName.ToLower().Contains("open list"));
 
-      operations = OperationRecord.GlobalFilters(operations, tenant, fromDate, toDate);
       var points = SharedHelpers.GetSeriesByOperationObjectType(operations);
 
       var chart = new Highcharts("ListOpenings")
@@ -68,10 +67,9 @@ namespace LogAnalyzer.Controllers
 
     public ActionResult ListRatingByTimeChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
     {
-      var operations = Repository.GetOpertaionRecords()
+      var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
         .Where(x => x.OperationName.ToLower().Contains("open list"));
-
-      operations = OperationRecord.GlobalFilters(operations, tenant, fromDate, toDate);
+      
       var points = GetSeriesByOperationObjectTypeAverageDuration(operations);
 
       var chart = new Highcharts("ListTimings")
@@ -106,10 +104,9 @@ namespace LogAnalyzer.Controllers
 
     public ActionResult FolderRatingChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
     {
-      var operations = Repository.GetOpertaionRecords()
+      var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
         .Where(x => x.OperationName.ToLower().Contains("navigate to folder"));
-
-      operations = OperationRecord.GlobalFilters(operations, tenant, fromDate, toDate);
+      
       var points = SharedHelpers.GetSeriesByOperationObjectType(operations);
 
       var chart = new Highcharts("FolderOpenings")
@@ -144,10 +141,9 @@ namespace LogAnalyzer.Controllers
 
     public ActionResult FolderRatingByTimeChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
     {
-      var operations = Repository.GetOpertaionRecords()
+      var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
         .Where(x => x.OperationName.ToLower().Contains("navigate to folder"));
 
-      operations = OperationRecord.GlobalFilters(operations, tenant, fromDate, toDate);
       var points = GetSeriesByOperationObjectTypeAverageDuration(operations);
 
       var chart = new Highcharts("FolderTimings")

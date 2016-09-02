@@ -164,6 +164,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DetalizationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\DocumentwiseOperationsController.cs" />
     <Compile Include="Controllers\ListRatingController.cs" />
@@ -385,6 +386,7 @@
     <Content Include="Views\ListRating\ListRatingChartByTimeView.cshtml" />
     <Content Include="Views\ListRating\FolderRatingChartView.cshtml" />
     <Content Include="Views\ListRating\FolderRatingChartByTimeView.cshtml" />
+    <Content Include="Views\Detalization\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

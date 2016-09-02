@@ -35,11 +35,10 @@ namespace LogAnalyzer.Controllers
     public ActionResult CreateOperationStatisticsChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
     {
       var interfaces = EntityTypes.GetDocumentInterfaces().ToList();
-      var operations = Repository.GetOpertaionRecords()
+      var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
         .Where(x => interfaces.Contains(x.EntityType))
         .Where(x => x.OperationName.ToLower().Contains("create"));
 
-      operations = OperationRecord.GlobalFilters(operations, tenant, fromDate, toDate);
       var points = GetSeriesByEntityType(operations);
 
       var chart = new Highcharts("CreationOperations")
@@ -75,11 +74,10 @@ namespace LogAnalyzer.Controllers
     public ActionResult EditOperationStatisticsChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
     {
       var types = EntityTypes.GetDocumentTypes().ToList();
-      var operations = Repository.GetOpertaionRecords()
+      var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
         .Where(x => types.Contains(x.OperationObjectType))
         .Where(x => x.OperationName.ToLower() == "open document to edit");
 
-      operations = OperationRecord.GlobalFilters(operations, tenant, fromDate, toDate);
       var points = SharedHelpers.GetSeriesByOperationObjectType(operations);
 
       var chart = new Highcharts("EditOperations")

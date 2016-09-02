@@ -11,23 +11,45 @@ namespace LogAnalyzer.ViewModel
 {
   public class Repository
   {
-    private static List<OperationRecord> _operations;
+    private static IList<OperationRecord> _operations;
 
-    public static List<OperationRecord> GetOpertaionRecords()
+    public static IList<OperationRecord> GetOpertaionRecords()
     {
       _operations = _operations ?? SessionFactory.GetSession().Query<OperationRecord>().ToList();
 
       return _operations;
     }
 
+    public static IList<OperationRecord> GetOpertaionRecords(string tenant, DateTime? fromDate, DateTime? toDate)
+    {
+      IEnumerable<OperationRecord> operations = _operations ?? GetOpertaionRecords();//SessionFactory.GetSession().Query<OperationRecord>();
+
+      if (tenant != "undefined")
+        operations = operations.Where(x => x.Tenant == tenant);
+
+      if (fromDate.HasValue)
+        operations = operations.Where(x => x.Date > fromDate.Value);
+
+      if (toDate.HasValue)
+        operations = operations.Where(x => x.Date < toDate.Value);
+
+      return operations.ToList();
+    }
+
     public static DateTime GetFirstDate()
     {
-      return SessionFactory.GetSession().Query<OperationRecord>().OrderBy(x => x.Date).Select(x => x.Date).FirstOrDefault().Value;
+      var session = SessionFactory.GetSession();
+      var firstDate = session.Query<OperationRecord>().OrderBy(x => x.Date).Select(x => x.Date).FirstOrDefault().Value;
+      session.Close();
+      return firstDate;
     }
 
     public static DateTime GetLastDate()
     {
-      return SessionFactory.GetSession().Query<OperationRecord>().OrderByDescending(x => x.Date).Select(x => x.Date).FirstOrDefault().Value;
+      var session = SessionFactory.GetSession();
+      var lastDate = session.Query<OperationRecord>().OrderByDescending(x => x.Date).Select(x => x.Date).FirstOrDefault().Value;
+      session.Close();
+      return lastDate;
     }
   }
 }

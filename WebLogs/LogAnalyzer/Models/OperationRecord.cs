@@ -16,7 +16,7 @@ namespace LogAnalyzer.Models
     public virtual string OperationObjectType { get; set; }
     public virtual string Tenant { get; set; }
 
-    public static IEnumerable<OperationRecord> GlobalFilters(IEnumerable<OperationRecord> operations, string tenant, DateTime? fromDate, DateTime? toDate)
+    public static List<OperationRecord> GlobalFilters(IEnumerable<OperationRecord> operations, string tenant, DateTime? fromDate, DateTime? toDate)
     {
 
       if (tenant != "undefined")
@@ -28,7 +28,7 @@ namespace LogAnalyzer.Models
       if (toDate.HasValue)
         operations = operations.Where(x => x.Date < toDate.Value);
 
-      return operations;
+      return operations.ToList();
     }
   }
 }
