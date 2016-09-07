@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using LogAnalyzer.Filters;
+using LogAnalyzer.Models;
 using LogAnalyzer.ViewModel;
 using NHibernate.Criterion;
 using NHibernate.Type;
@@ -14,14 +15,17 @@ namespace LogAnalyzer.Controllers
   public class DetalizationController : Controller
   {
     // GET: Detalisation
-    public ActionResult Index(string operationName = "", string tenant="undefined", DateTime? beginDate = null, DateTime? endDate = null, string entityType = "")
+    public ActionResult Index(string operationName = "", string tenant = "undefined", DateTime? beginDate = null, DateTime? endDate = null, string entityType = "", int page = 1)
     {
-      var operations = Repository.GetOpertaionRecords(tenant, beginDate, endDate);
+      var entriesPerPage = 25;
+      IEnumerable<OperationRecord> operations = Repository.GetOpertaionRecords(tenant, beginDate, endDate);
+      ViewBag.PagesAmount = operations.Count() / entriesPerPage + 1;
+      ViewBag.CurrentPage = page;
+      
+      operations = operations.OrderBy(x => x.Date);
 
-      // TODO: Delete when pagination will be done.
-      if (operations.Count > 100)
-        operations = operations.Take(100).ToList();
-
+      operations = operations.Skip((page - 1) * entriesPerPage).Take(entriesPerPage);
+      
       return View(operations);
     }
   }

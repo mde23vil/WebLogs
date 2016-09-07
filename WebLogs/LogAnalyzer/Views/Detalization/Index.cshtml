@@ -1,63 +1,92 @@
-﻿@model IEnumerable<LogAnalyzer.Models.OperationRecord>
+﻿@using LogAnalyzer.Controllers
+@model IEnumerable<LogAnalyzer.Models.OperationRecord>
 
 @*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+      @Html.ActionLink("Create New", "Create")
+  </p>*@
 <table class="table-condensed">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.OperationName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Duration)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EntityType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OperationObjectType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tenant)
-        </th>
-        <th></th>
-    </tr>
+  <tr>
+    <th>
+      @Html.DisplayNameFor(model => model.OperationName)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.Date)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.User)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.Duration)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.EntityType)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.OperationObjectType)
+    </th>
+    <th>
+      @Html.DisplayNameFor(model => model.Tenant)
+    </th>
+    <th></th>
+  </tr>
 
-@foreach (var item in Model) {
+  @foreach (var item in Model)
+  {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.OperationName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Duration)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EntityType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OperationObjectType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tenant)
-        </td>
-        @*<td>
+      <td>
+        @Html.DisplayFor(modelItem => item.OperationName)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Date)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.User)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Duration)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.EntityType)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.OperationObjectType)
+      </td>
+      <td>
+        @Html.DisplayFor(modelItem => item.Tenant)
+      </td>
+      @*<td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>*@
     </tr>
-}
+  }
 
 </table>
+
+<footer class="footer">
+  <div class="container">
+    <span>@Html.ActionLink("1", "Index", new {page = 1})</span>
+
+    @if (ViewBag.CurrentPage - 4 > 2)
+    {
+    <span>@Html.ActionLink("...", "Index", new {page = ViewBag.CurrentPage - 5 })</span>
+    }
+
+    @for (int i = -4; i <= 4; i++)
+    {
+      int pageNumber = ViewBag.CurrentPage + i;
+      if (pageNumber > 1 && pageNumber < ViewBag.PagesAmount)
+      {
+        <span>@Html.ActionLink(pageNumber.ToString(), "Index", new {page = pageNumber})</span>
+      }
+    }
+
+    @if (ViewBag.CurrentPage + 4 < ViewBag.PagesAmount - 1)
+    {
+    <span>@Html.ActionLink("...", "Index", new { page = ViewBag.CurrentPage + 5 })</span>
+    }
+
+    <span>@Html.ActionLink((string) ViewBag.PagesAmount.ToString(), "Index", new { page = ViewBag.PagesAmount })</span>
+  </div>
+</footer>
