@@ -18,7 +18,7 @@ namespace LogAnalyzer.Controllers
     public ActionResult Index(string operationName = "", string tenant = "undefined", DateTime? beginDate = null, DateTime? endDate = null, string entityType = "", int page = 1)
     {
       var entriesPerPage = 25;
-      IEnumerable<OperationRecord> operations = Repository.GetOpertaionRecords(tenant, beginDate, endDate);
+      var operations = Repository.GetOpertaionRecords(tenant, beginDate, endDate);
       ViewBag.PagesAmount = operations.Count() / entriesPerPage + 1;
       ViewBag.CurrentPage = page;
       

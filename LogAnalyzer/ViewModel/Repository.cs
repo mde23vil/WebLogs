@@ -11,18 +11,14 @@ namespace LogAnalyzer.ViewModel
 {
   public class Repository
   {
-    private static IList<OperationRecord> _operations;
-
-    public static IList<OperationRecord> GetOpertaionRecords()
+    public static IQueryable<OperationRecord> GetOpertaionRecords()
     {
-      _operations = _operations ?? SessionFactory.GetSession().Query<OperationRecord>().ToList();
-
-      return _operations;
+      return SessionFactory.GetSession().Query<OperationRecord>();
     }
 
-    public static IList<OperationRecord> GetOpertaionRecords(string tenant, DateTime? fromDate, DateTime? toDate)
+    public static IQueryable<OperationRecord> GetOpertaionRecords(string tenant, DateTime? fromDate, DateTime? toDate)
     {
-      IEnumerable<OperationRecord> operations = _operations ?? GetOpertaionRecords();//SessionFactory.GetSession().Query<OperationRecord>();
+      var operations = GetOpertaionRecords();
 
       if (tenant != "undefined")
         operations = operations.Where(x => x.Tenant == tenant);
@@ -33,7 +29,7 @@ namespace LogAnalyzer.ViewModel
       if (toDate.HasValue)
         operations = operations.Where(x => x.Date < toDate.Value);
 
-      return operations.ToList();
+      return operations;
     }
 
     public static DateTime GetFirstDate()
