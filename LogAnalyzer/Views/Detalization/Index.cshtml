@@ -1,5 +1,8 @@
-﻿@using LogAnalyzer.Controllers
-@model IEnumerable<LogAnalyzer.Models.OperationRecord>
+﻿@using System.Activities.Expressions
+@using System.Activities.Tracking
+@using LogAnalyzer.Controllers
+@using Microsoft.Ajax.Utilities
+@model LogAnalyzer.ViewModel.Detalization
 
 @*<p>
       @Html.ActionLink("Create New", "Create")
@@ -7,30 +10,30 @@
 <table class="table-condensed">
   <tr>
     <th>
-      @Html.DisplayNameFor(model => model.OperationName)
+      @Html.DisplayNameFor(model => model.Operations.First().OperationName))
     </th>
     <th>
-      @Html.DisplayNameFor(model => model.Date)
+      @Html.DisplayNameFor(model => model.Operations.First().Date)
     </th>
     <th>
-      @Html.DisplayNameFor(model => model.User)
+      @Html.DisplayNameFor(model => model.Operations.First().User)
     </th>
     <th>
-      @Html.DisplayNameFor(model => model.Duration)
+      @Html.DisplayNameFor(model => model.Operations.First().Duration)
     </th>
     <th>
-      @Html.DisplayNameFor(model => model.EntityType)
+      @Html.DisplayNameFor(model => model.Operations.First().EntityType)
     </th>
     <th>
-      @Html.DisplayNameFor(model => model.OperationObjectType)
+      @Html.DisplayNameFor(model => model.Operations.First().OperationObjectType)
     </th>
     <th>
-      @Html.DisplayNameFor(model => model.Tenant)
+      @Html.DisplayNameFor(model => model.Operations.First().Tenant)
     </th>
     <th></th>
   </tr>
 
-  @foreach (var item in Model)
+  @foreach (var item in Model.Operations)
   {
     <tr>
       <td>
@@ -66,27 +69,34 @@
 
 <footer class="footer">
   <div class="container">
-    <span>@Html.ActionLink("1", "Index", new {page = 1})</span>
+    @{
+      Model.Parameters["page"] = 1;
+      <span>@Html.ActionLink("1", "Index", Model.Parameters)</span>
 
-    @if (ViewBag.CurrentPage - 4 > 2)
-    {
-    <span>@Html.ActionLink("...", "Index", new {page = ViewBag.CurrentPage - 5 })</span>
-    }
-
-    @for (int i = -4; i <= 4; i++)
-    {
-      int pageNumber = ViewBag.CurrentPage + i;
-      if (pageNumber > 1 && pageNumber < ViewBag.PagesAmount)
+      if (Model.CurrentPage - 4 > 2)
       {
-        <span>@Html.ActionLink(pageNumber.ToString(), "Index", new {page = pageNumber})</span>
+        Model.Parameters["page"] = Model.CurrentPage - 5;
+        <span>@Html.ActionLink("...", "Index", Model.Parameters)</span>
       }
-    }
 
-    @if (ViewBag.CurrentPage + 4 < ViewBag.PagesAmount - 1)
-    {
-    <span>@Html.ActionLink("...", "Index", new { page = ViewBag.CurrentPage + 5 })</span>
-    }
+      for (int i = -4; i <= 4; i++)
+      {
+        int pageNumber = Model.CurrentPage + i;
+        if (pageNumber > 1 && pageNumber < Model.LastPage)
+        {
+          Model.Parameters["page"] = pageNumber;
+          <span>@Html.ActionLink(pageNumber.ToString(), "Index", Model.Parameters)</span>
+        }
+      }
 
-    <span>@Html.ActionLink((string) ViewBag.PagesAmount.ToString(), "Index", new { page = ViewBag.PagesAmount })</span>
+      if (Model.CurrentPage + 4 < Model.LastPage - 1)
+      {
+        Model.Parameters["page"] = Model.CurrentPage + 5;
+        <span>@Html.ActionLink("...", "Index", Model.Parameters)</span>
+      }
+
+      Model.Parameters["page"] = Model.LastPage;
+      <span>@Html.ActionLink(Model.LastPage.ToString(), "Index", Model.Parameters)</span>
+    }
   </div>
 </footer>

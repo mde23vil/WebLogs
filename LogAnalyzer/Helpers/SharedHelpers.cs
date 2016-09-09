@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.EnterpriseServices.Internal;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using DotNet.Highcharts.Options;
 using LogAnalyzer.Models;
 
@@ -21,7 +23,7 @@ namespace LogAnalyzer.Helpers
         .Select(x => new Point
         {
           Name = x.EntityType,
-          Y = x.Count
+          Y = x.Count,
         }).ToArray();
 
       return points;
@@ -52,6 +54,14 @@ namespace LogAnalyzer.Helpers
     {
       var items = strings.Select(x => new { Id = x, Text = x }).ToList();
       return new SelectList(items, "Id", "Text", items.First().Id);
+    }
+
+    public static string GenerateDetalizationLink(UrlHelper url, RouteValueDictionary parameters)
+    {
+      return "function() { window.location.href = \""
+             + url.Action("Index", "Detalization", parameters)
+             + "\" " +
+             "}";
     }
   }
 }

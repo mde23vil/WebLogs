@@ -196,6 +196,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.ru-RU.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\Detalization.cs" />
     <Compile Include="ViewModel\Repository.cs" />
   </ItemGroup>
   <ItemGroup>

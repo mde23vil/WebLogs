@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using LogAnalyzer.Filters;
 using LogAnalyzer.Models;
 using LogAnalyzer.ViewModel;
@@ -15,18 +16,46 @@ namespace LogAnalyzer.Controllers
   public class DetalizationController : Controller
   {
     // GET: Detalisation
-    public ActionResult Index(string operationName = "", string tenant = "undefined", DateTime? beginDate = null, DateTime? endDate = null, string entityType = "", int page = 1)
+    public ActionResult Index(int page = 1, string operationName = "", bool exactMatch = false, string tenant = "undefined", DateTime? beginDate = null, DateTime? endDate = null, string entityType = "")
     {
-      var entriesPerPage = 25;
+      var viewModel = new Detalization();
       var operations = Repository.GetOpertaionRecords(tenant, beginDate, endDate);
-      ViewBag.PagesAmount = operations.Count() / entriesPerPage + 1;
-      ViewBag.CurrentPage = page;
-      
+
+      if (!string.IsNullOrEmpty(operationName))
+      {
+        operations = exactMatch ? 
+          operations.Where(x => x.OperationName == operationName) : 
+          operations.Where(x => x.OperationName.ToLower().Contains(operationName));
+      }
+
+      if (!string.IsNullOrEmpty(entityType))
+        operations = operations.Where(x => x.EntityType == entityType);
+
       operations = operations.OrderBy(x => x.Date);
 
-      operations = operations.Skip((page - 1) * entriesPerPage).Take(entriesPerPage);
+      var parameters = new RouteValueDictionary();
+
+      parameters.Add("page", page);
+
+      if (!string.IsNullOrEmpty(operationName))
+      {
+        parameters.Add("operationName", operationName);
+        parameters.Add("exactMatch", exactMatch);
+      }
+
+      if (tenant != "undefined")
+        parameters.Add("tenant", tenant);
+
+      if (beginDate != null)
+        parameters.Add("beginDate", beginDate);
+
+      if (endDate != null)
+        parameters.Add("endDate", endDate);
+
+      if (!string.IsNullOrEmpty(entityType))
+        parameters.Add("entityType", entityType);
       
-      return View(operations);
+      return View(new Detalization() { Operations = operations, CurrentPage = page, Parameters = parameters} );
     }
   }
 }
