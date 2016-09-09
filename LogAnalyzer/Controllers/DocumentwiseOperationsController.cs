@@ -39,7 +39,7 @@ namespace LogAnalyzer.Controllers
         .Where(x => interfaces.Contains(x.EntityType))
         .Where(x => x.OperationName.ToLower().Contains("create"));
 
-      var points = GetSeriesByEntityType(operations);
+      var points = SharedHelpers.GetSeriesByEntityType(operations);
 
       var chart = new Highcharts("CreationOperations")
                 .InitChart(new Chart { PlotShadow = false, PlotBackgroundColor = null, PlotBorderWidth = null, MarginTop = 50 })
@@ -108,18 +108,6 @@ namespace LogAnalyzer.Controllers
 
       ViewBag.EditChart = chart;
       return PartialView("EditOperationStatisticsChart", operations);
-    }
-
-    private static Point[] GetSeriesByEntityType(IEnumerable<OperationRecord> operations)
-    {
-      var group = operations.ToList().GroupBy(x => x.EntityType)
-        .Select(x => new Point
-        {
-          Name = x.Key,
-          Y = x.Count(),
-        }).ToArray();
-
-      return group;
     }
   }
 }

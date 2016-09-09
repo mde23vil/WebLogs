@@ -139,22 +139,30 @@ namespace LogAnalyzer.Controllers
       return PartialView("UserDocumentBodyOperations", operations);
     }
 
-    private Point[] GetSeriesByUser(IEnumerable<OperationRecord> operations)
+    private Point[] GetSeriesByUser(IQueryable<OperationRecord> operations)
     {
-      var group = operations.ToList().GroupBy(x => x.User)
-        .Select(x => new Point
+      var group = operations.GroupBy(x => x.User)
+        .Select(g => new { User = g.Key, Count = g.Count() })
+        .OrderByDescending(p => p.Count)
+        .ToList();
+
+      var maxValue = group.Select(g => g.Count).Max();
+      var minValue = maxValue * 0.05;
+
+      var points = group.Where(g => g.Count > minValue).Select(x => new Point
         {
-          Name = x.Key,
-          Y = x.Count(),
+          Name = x.User,
+          Y = x.Count,
           Events = new PlotOptionsSeriesPointEvents { Click =
             "function() {" + 
             "var tenant = $('#tenant')[0].options[$('#tenant')[0].selectedIndex].value;" +
-            $"return $.get('/UserwiseOperations/CreateOperationsByUser?tenant=' + tenant + '&user={x.Key}').html(); " +
+            $"return $.get('/UserwiseOperations/CreateOperationsByUser?tenant=' + tenant + '&user={x.User}').html(); " +
             "}"
           }
-        }).ToArray();
+        })
+        .ToArray();
 
-      return group;
+      return points;
     }
   }
 }

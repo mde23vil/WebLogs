@@ -139,7 +139,7 @@ namespace LogAnalyzer.Controllers
       return PartialView("FolderRatingChartView", operations);
     }
 
-    public ActionResult FolderRatingByTimeChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
+    public ActionResult FolderRatingByAverageDurationChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
     {
       var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
         .Where(x => x.OperationName.ToLower().Contains("navigate to folder"));
@@ -176,16 +176,22 @@ namespace LogAnalyzer.Controllers
       return PartialView("FolderRatingChartByTimeView", operations);
     }
 
-    public static Point[] GetSeriesByOperationObjectTypeAverageDuration(IEnumerable<OperationRecord> operations)
+    public static Point[] GetSeriesByOperationObjectTypeAverageDuration(IQueryable<OperationRecord> operations)
     {
-      var group = operations.ToList().GroupBy(x => x.OperationObjectType)
+      var group = operations.GroupBy(x => x.OperationObjectType)
+        .Select(g => new { OperationObjectType = g.Key, Avg = g.Sum(z => z.Duration) / g.Count() })
+        .Where(a => a.Avg > 1000)
+        .OrderByDescending(p => p.Avg)
+        .ToList();
+
+      var points = group
         .Select(x => new Point
         {
-          Name = x.Key,
-          Y = x.Sum(z => z.Duration) / x.Count(),
+          Name = x.OperationObjectType,
+          Y = x.Avg
         }).ToArray();
 
-      return group;
+      return points;
     }
   }
 }

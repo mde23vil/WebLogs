@@ -23,7 +23,7 @@
     </div>
 </div>
 <div class="row">
-    <div id="FolderRatingByTimeChart" class="col-md-12">
+    <div id="FolderRatingByAverageDurationChart" class="col-md-12">
     </div>
 </div>
 
@@ -42,8 +42,8 @@
             $("#FolderRatingChart").html(r);
         });
 
-        $.get("/ListRating/FolderRatingByTimeChart", function (r) {
-            $("#FolderRatingByTimeChart").html(r);
+        $.get("/ListRating/FolderRatingByAverageDurationChart", function (r) {
+            $("#FolderRatingByAverageDurationChart").html(r);
         });
     });
 
@@ -68,10 +68,10 @@
                 $("#FolderRatingChart").html(r);
             });
 
-        $.get("/ListRating/FolderRatingByTimeChart?tenant=" + tenant
+        $.get("/ListRating/FolderRatingByAverageDurationChart?tenant=" + tenant
             + "&fromDate=" + $('#datetimepicker1').data('date')
             + "&toDate=" + $('#datetimepicker2').data('date'), function (r) {
-                $("#FolderRatingByTimeChart").html(r);
+                $("#FolderRatingByAverageDurationChart").html(r);
             });
     });
 </script>
