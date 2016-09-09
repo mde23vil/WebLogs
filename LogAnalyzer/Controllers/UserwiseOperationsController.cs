@@ -30,10 +30,18 @@ namespace LogAnalyzer.Controllers
 
     public ActionResult UserCreateOperations(string tenant, DateTime? fromDate = null, DateTime? toDate = null)
     {
+      var operationNamePart = "create";
       var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
         .Where(x => x.OperationName.ToLower().Contains("create"));
 
       var points = GetSeriesByUser(operations);
+      foreach (var point in points)
+      {
+        point.Events = new PointEvents()
+        {
+          Click = SharedHelpers.GenerateDetalizationLink(this.Url, SharedHelpers.GenerateDetalizationParameters(operationNamePart, false, tenant, user: point.Name))
+        };
+      }
 
       var chart = new Highcharts("CreationOperations")
                 .InitChart(new Chart { PlotShadow = false, PlotBackgroundColor = null, PlotBorderWidth = null, MarginTop = 50 })
@@ -67,10 +75,18 @@ namespace LogAnalyzer.Controllers
 
     public ActionResult UserEditOperations(string tenant, DateTime? fromDate = null, DateTime? toDate = null)
     {
+      var operationNamePart = "edit";
       var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
-        .Where(x => x.OperationName.ToLower().Contains("edit"));
+        .Where(x => x.OperationName.ToLower().Contains(operationNamePart));
       
       var points = GetSeriesByUser(operations);
+      foreach (var point in points)
+      {
+        point.Events = new PointEvents()
+        {
+          Click = SharedHelpers.GenerateDetalizationLink(this.Url, SharedHelpers.GenerateDetalizationParameters(operationNamePart, false, tenant, user: point.Name))
+        };
+      }
 
       var chart = new Highcharts("EditOperations")
                 .InitChart(new Chart { PlotShadow = false, PlotBackgroundColor = null, PlotBorderWidth = null, MarginTop = 50 })
@@ -104,10 +120,18 @@ namespace LogAnalyzer.Controllers
 
     public ActionResult UserDocumentBodyOperations(string tenant, DateTime? fromDate = null, DateTime? toDate = null)
     {
+      var operationNamePart = "open document to";
       var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
-        .Where(x => x.OperationName.ToLower().Contains("open document to"));
+        .Where(x => x.OperationName.ToLower().Contains(operationNamePart));
 
       var points = GetSeriesByUser(operations);
+      foreach (var point in points)
+      {
+        point.Events = new PointEvents()
+        {
+          Click = SharedHelpers.GenerateDetalizationLink(this.Url, SharedHelpers.GenerateDetalizationParameters(operationNamePart, false, tenant, user: point.Name))
+        };
+      }
 
       var chart = new Highcharts("DocumentBodyOperations")
                 .InitChart(new Chart { PlotShadow = false, PlotBackgroundColor = null, PlotBorderWidth = null, MarginTop = 50 })

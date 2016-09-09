@@ -30,10 +30,19 @@ namespace LogAnalyzer.Controllers
     
     public ActionResult ListRatingChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
     {
+      var operationNamePart = "open list";
       var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
-        .Where(x => x.OperationName.ToLower().Contains("open list"));
+        .Where(x => x.OperationName.ToLower().Contains(operationNamePart));
 
       var points = SharedHelpers.GetSeriesByOperationObjectType(operations);
+      foreach (var point in points)
+      {
+        point.Events = new PointEvents()
+        {
+          Click = SharedHelpers.GenerateDetalizationLink(this.Url, SharedHelpers.GenerateDetalizationParameters(operationNamePart, false, tenant, operationObjectType: point.Name))
+        };
+      }
+
 
       var chart = new Highcharts("ListOpenings")
                 .InitChart(new Chart { PlotShadow = false, PlotBackgroundColor = null, PlotBorderWidth = null, MarginTop = 50 })
@@ -67,10 +76,18 @@ namespace LogAnalyzer.Controllers
 
     public ActionResult ListRatingByTimeChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
     {
+      var operationNamePart = "open list";
       var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
-        .Where(x => x.OperationName.ToLower().Contains("open list"));
+        .Where(x => x.OperationName.ToLower().Contains(operationNamePart));
       
       var points = GetSeriesByOperationObjectTypeAverageDuration(operations);
+      foreach (var point in points)
+      {
+        point.Events = new PointEvents()
+        {
+          Click = SharedHelpers.GenerateDetalizationLink(this.Url, SharedHelpers.GenerateDetalizationParameters(operationNamePart, false, tenant, operationObjectType: point.Name))
+        };
+      }
 
       var chart = new Highcharts("ListTimings")
                 .InitChart(new Chart { PlotShadow = false, PlotBackgroundColor = null, PlotBorderWidth = null, MarginTop = 50 })
@@ -104,10 +121,18 @@ namespace LogAnalyzer.Controllers
 
     public ActionResult FolderRatingChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
     {
+      var operationNamePart = "navigate to folder";
       var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
-        .Where(x => x.OperationName.ToLower().Contains("navigate to folder"));
+        .Where(x => x.OperationName.ToLower().Contains(operationNamePart));
       
       var points = SharedHelpers.GetSeriesByOperationObjectType(operations);
+      foreach (var point in points)
+      {
+        point.Events = new PointEvents()
+        {
+          Click = SharedHelpers.GenerateDetalizationLink(this.Url, SharedHelpers.GenerateDetalizationParameters(operationNamePart, false, tenant, operationObjectType: point.Name))
+        };
+      }
 
       var chart = new Highcharts("FolderOpenings")
                 .InitChart(new Chart { PlotShadow = false, PlotBackgroundColor = null, PlotBorderWidth = null, MarginTop = 50 })
@@ -141,10 +166,18 @@ namespace LogAnalyzer.Controllers
 
     public ActionResult FolderRatingByAverageDurationChart(string tenant = "undefined", DateTime? fromDate = null, DateTime? toDate = null)
     {
+      var operationNamePart = "navigate to folder";
       var operations = Repository.GetOpertaionRecords(tenant, fromDate, toDate)
-        .Where(x => x.OperationName.ToLower().Contains("navigate to folder"));
+        .Where(x => x.OperationName.ToLower().Contains(operationNamePart));
 
       var points = GetSeriesByOperationObjectTypeAverageDuration(operations);
+      foreach (var point in points)
+      {
+        point.Events = new PointEvents()
+        {
+          Click = SharedHelpers.GenerateDetalizationLink(this.Url, SharedHelpers.GenerateDetalizationParameters(operationNamePart, false, tenant, operationObjectType: point.Name))
+        };
+      }
 
       var chart = new Highcharts("FolderTimings")
                 .InitChart(new Chart { PlotShadow = false, PlotBackgroundColor = null, PlotBorderWidth = null, MarginTop = 50 })

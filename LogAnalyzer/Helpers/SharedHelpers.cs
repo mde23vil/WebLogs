@@ -56,6 +56,33 @@ namespace LogAnalyzer.Helpers
       return new SelectList(items, "Id", "Text", items.First().Id);
     }
 
+    public static RouteValueDictionary GenerateDetalizationParameters(string operationNamePart = "", bool exactMatch = false, string tenant = "", string entityType = "", string operationObjectType = "", string user = "")
+    {
+      RouteValueDictionary parameters = new RouteValueDictionary();
+
+      if (!string.IsNullOrEmpty(tenant))
+      {
+        parameters.Add("tenant", tenant);
+      }
+
+      if (!string.IsNullOrEmpty(operationNamePart))
+      {
+        parameters.Add("operationName", operationNamePart);
+        parameters.Add("exactMatch", exactMatch);
+      }
+
+      if (!string.IsNullOrEmpty(entityType))
+        parameters.Add("entityType", entityType);
+
+      if (!string.IsNullOrEmpty(operationObjectType))
+        parameters.Add("operationObjectType", operationObjectType);
+
+      if (!string.IsNullOrEmpty(user))
+        parameters.Add("user", user);
+
+      return parameters;// SharedHelpers.GenerateDetalizationLink(url, parameters);
+    }
+
     public static string GenerateDetalizationLink(UrlHelper url, RouteValueDictionary parameters)
     {
       return "function() { window.location.href = \""

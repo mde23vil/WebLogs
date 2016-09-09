@@ -46,7 +46,7 @@ namespace LogAnalyzer.Controllers
       {
         point.Events = new PointEvents()
         {
-          Click = DetalizationByOperationName(operationNamePart, true, point.Name)
+          Click = SharedHelpers.GenerateDetalizationLink(this.Url, SharedHelpers.GenerateDetalizationParameters(operationNamePart, true, tenant, entityType: point.Name))
         };
       }
 
@@ -93,7 +93,7 @@ namespace LogAnalyzer.Controllers
       {
         point.Events = new PointEvents()
         {
-          Click = DetalizationByOperationName(operationNamePart, true, point.Name)
+          Click = SharedHelpers.GenerateDetalizationLink(this.Url, SharedHelpers.GenerateDetalizationParameters(operationNamePart, true, tenant, operationObjectType: point.Name))
         };
       }
 
@@ -125,22 +125,6 @@ namespace LogAnalyzer.Controllers
 
       ViewBag.EditChart = chart;
       return PartialView("EditOperationStatisticsChart", operations);
-    }
-
-    private string DetalizationByOperationName(string operationNamePart = "", bool exactMatch = false, string entityType = "")
-    {
-      RouteValueDictionary parameters = new RouteValueDictionary();
-
-      if (!string.IsNullOrEmpty(operationNamePart))
-      {
-        parameters.Add("operationName", operationNamePart);
-        parameters.Add("exactMatch", exactMatch);
-      }
-
-      if (!string.IsNullOrEmpty(entityType))
-        parameters.Add("entityType", entityType);
-
-      return SharedHelpers.GenerateDetalizationLink(this.Url, parameters);
     }
   }
 }

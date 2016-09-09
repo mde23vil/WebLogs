@@ -16,7 +16,7 @@ namespace LogAnalyzer.Controllers
   public class DetalizationController : Controller
   {
     // GET: Detalisation
-    public ActionResult Index(int page = 1, string operationName = "", bool exactMatch = false, string tenant = "undefined", DateTime? beginDate = null, DateTime? endDate = null, string entityType = "")
+    public ActionResult Index(int page = 1, string operationName = "", bool exactMatch = false, string tenant = "undefined", DateTime? beginDate = null, DateTime? endDate = null, string entityType = "", string operationObjectType = "", string user="")
     {
       var viewModel = new Detalization();
       var operations = Repository.GetOpertaionRecords(tenant, beginDate, endDate);
@@ -30,6 +30,12 @@ namespace LogAnalyzer.Controllers
 
       if (!string.IsNullOrEmpty(entityType))
         operations = operations.Where(x => x.EntityType == entityType);
+
+      if (!string.IsNullOrEmpty(operationObjectType))
+        operations = operations.Where(x => x.OperationObjectType == operationObjectType);
+
+      if (!string.IsNullOrEmpty(user))
+        operations = operations.Where(x => x.User == user);
 
       operations = operations.OrderBy(x => x.Date);
 
@@ -54,7 +60,10 @@ namespace LogAnalyzer.Controllers
 
       if (!string.IsNullOrEmpty(entityType))
         parameters.Add("entityType", entityType);
-      
+
+      if (!string.IsNullOrEmpty(operationObjectType))
+        parameters.Add("operationObjectType", operationObjectType);
+
       return View(new Detalization() { Operations = operations, CurrentPage = page, Parameters = parameters} );
     }
   }

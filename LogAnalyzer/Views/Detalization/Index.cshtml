@@ -95,8 +95,11 @@
         <span>@Html.ActionLink("...", "Index", Model.Parameters)</span>
       }
 
-      Model.Parameters["page"] = Model.LastPage;
-      <span>@Html.ActionLink(Model.LastPage.ToString(), "Index", Model.Parameters)</span>
+      if (Model.LastPage != 1)
+      {
+        Model.Parameters["page"] = Model.LastPage;
+        <span>@Html.ActionLink(Model.LastPage.ToString(), "Index", Model.Parameters)</span>
+      }
     }
   </div>
 </footer>
