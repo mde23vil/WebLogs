@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogAnalyzer", "LogAnalyzer\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLLiteToMSSQL", "SQLLiteToMSSQL\SQLLiteToMSSQL.csproj", "{91C054CA-E26A-4081-B4AD-FB3C27BC31D1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C08512C-8ED8-437D-810E-B9BBB9ED6057}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B7CF292-4582-4E9A-8CD6-956475D733E9}"
 	ProjectSection(SolutionItems) = preProject
-		..\.gitignore = ..\.gitignore
+		.gitignore = .gitignore
 	EndProjectSection
 EndProject
 Global
